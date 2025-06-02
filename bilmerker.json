@@ -1,0 +1,100 @@
+{
+  "Audi": [
+    "A3",
+    "A4",
+    "A6",
+    "Q5",
+    "Q7",
+    "e-tron"
+  ],
+  "BMW": [
+    "1-serie",
+    "3-serie",
+    "5-serie",
+    "X1",
+    "X3",
+    "X5"
+  ],
+  "Ford": [
+    "Fiesta",
+    "Focus",
+    "Kuga",
+    "Mondeo",
+    "Mustang"
+  ],
+  "Hyundai": [
+    "i10",
+    "i20",
+    "i30",
+    "Ioniq",
+    "Kona",
+    "Tucson"
+  ],
+  "Kia": [
+    "Ceed",
+    "Niro",
+    "Picanto",
+    "Sorento",
+    "Sportage"
+  ],
+  "Mercedes-Benz": [
+    "A-Klasse",
+    "B-Klasse",
+    "C-Klasse",
+    "E-Klasse",
+    "GLC",
+    "GLE"
+  ],
+  "Nissan": [
+    "Leaf",
+    "Micra",
+    "Qashqai",
+    "X-Trail",
+    "Navara"
+  ],
+  "Peugeot": [
+    "208",
+    "308",
+    "3008",
+    "5008",
+    "Partner"
+  ],
+  "Skoda": [
+    "Citigo",
+    "Fabia",
+    "Octavia",
+    "Superb",
+    "Enyaq"
+  ],
+  "Tesla": [
+    "Model 3",
+    "Model S",
+    "Model X",
+    "Model Y"
+  ],
+  "Toyota": [
+    "Auris",
+    "Avensis",
+    "Corolla",
+    "Prius",
+    "RAV4",
+    "Yaris"
+  ],
+  "Volkswagen": [
+    "e-Golf",
+    "Golf",
+    "Passat",
+    "Polo",
+    "Tiguan",
+    "Touran",
+    "ID.4"
+  ],
+  "Volvo": [
+    "V40",
+    "V60",
+    "V70",
+    "XC40",
+    "XC60",
+    "XC90"
+  ]
+}
