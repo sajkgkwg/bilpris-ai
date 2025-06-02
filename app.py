@@ -229,3 +229,9 @@ def models_endpoint():
     models_list = fetch_models_for_brand(brand_name)
     model_dicts = [{"name": m[0], "value": m[1]} for m in models_list]
     return jsonify({"models": model_dicts})
+
+import os
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Bruk Render sin PORT
+    app.run(host="0.0.0.0", port=port)
