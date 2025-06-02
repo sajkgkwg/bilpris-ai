@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruktbilpriskalkulator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bruktbilpris Estimator</h1>
+        <p>Fyll inn opplysninger om bilen din, og få et estimat basert på lignende annonser på FINN.no.</p>
+        {% if message %}
+        <div class="message">{{ message }}</div>
+        {% endif %}
+        <form id="priceForm" method="get" action="{{ url_for('index') }}">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="brandSelect">Bilmerke:</label>
+                    <select id="brandSelect" name="brand" required>
+                        <option value="" disabled selected>Velg merke</option>
+                        {% for brand in brands %}
+                        <option value="{{ brand }}" {% if form_data.get('brand') == brand %}selected{% endif %}>{{ brand }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="modelSelect">Modell:</label>
+                    <select id="modelSelect" name="model" required>
+                        {% if form_data.get('model') %}
+                        <option value="{{ form_data.get('model') }}" selected>{{ form_data.get('model') }}</option>
+                        {% else %}
+                        <option value="" disabled selected>Velg modell</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="yearInput">Årsmodell:</label>
+                    <input type="number" id="yearInput" name="year" min="1900" max="2100" required value="{{ form_data.get('year') or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="kmInput">Kilometerstand:</label>
+                    <input type="number" id="kmInput" name="km" required value="{{ form_data.get('km') or '' }}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="trimInput">Utstyrsnivå (valgfritt):</label>
+                    <input type="text" id="trimInput" name="trim" value="{{ form_data.get('trim') or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="fuelSelect">Drivstoff:</label>
+                    <select id="fuelSelect" name="fuel" required>
+                        <option value="" disabled selected>Velg drivstoff</option>
+                        <option value="1" {% if form_data.get('fuel') == '1' %}selected{% endif %}>Bensin</option>
+                        <option value="2" {% if form_data.get('fuel') == '2' %}selected{% endif %}>Diesel</option>
+                        <option value="4" {% if form_data.get('fuel') == '4' %}selected{% endif %}>Elektrisitet</option>
+                        <option value="5" {% if form_data.get('fuel') == '5' %}selected{% endif %}>Gass</option>
+                        <option value="6" {% if form_data.get('fuel') == '6' %}selected{% endif %}>Gass+Bensin</option>
+                        <option value="7" {% if form_data.get('fuel') == '7' %}selected{% endif %}>Hybrid Bensin</option>
+                        <option value="8" {% if form_data.get('fuel') == '8' %}selected{% endif %}>Hybrid Diesel</option>
+                        <option value="9" {% if form_data.get('fuel') == '9' %}selected{% endif %}>Hydrogen</option>
+                        <option value="10" {% if form_data.get('fuel') == '10' %}selected{% endif %}>Plug-in Bensin</option>
+                        <option value="11" {% if form_data.get('fuel') == '11' %}selected{% endif %}>Plug-in Diesel</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="gearSelect">Girkasse:</label>
+                    <select id="gearSelect" name="gear" required>
+                        <option value="" disabled selected>Velg girtype</option>
+                        <option value="2" {% if form_data.get('gear') == '2' %}selected{% endif %}>Automat</option>
+                        <option value="1" {% if form_data.get('gear') == '1' %}selected{% endif %}>Manuell</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="locationSelect">Lokasjon:</label>
+                    <select id="locationSelect" name="location">
+                        <option value="Alle">Hele Norge</option>
+                        {% for region in regions %}
+                        <option value="{{ region }}" {% if form_data.get('location') == region %}selected{% endif %}>{{ region }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Estimer pris</button>
+        </form>
+        {% if result %}
+        <div class="result-section">
+            <h2>Estimert bruktbilpris</h2>
+            <p>Basert på {{ result.count }} lignende annonser:</p>
+            <ul>
+                <li>Laveste pris: {{ result.min }} kr</li>
+                <li>Høyeste pris: {{ result.max }} kr</li>
+                <li>Gjennomsnittspris: {{ result.average }} kr</li>
+                <li>Medianpris: {{ result.median }} kr</li>
+            </ul>
+            <p class="estimate">Anslått markedsverdi: <strong>{{ result.median }} kr</strong></p>
+        </div>
+        {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
